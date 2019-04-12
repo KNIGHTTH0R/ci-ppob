@@ -18,7 +18,7 @@ class Home extends CI_Controller {
     echo $operator_name;
   }
 
-  public function get_nominal($operator){
+  public function get_nominal($type, $operator){
     $username   = "085781838818";
     $apiKey   = "4715caad53c186d4";
     $signature  = md5($username.$apiKey.'pl');
@@ -29,7 +29,7 @@ class Home extends CI_Controller {
               "sign"     : "36ab187b6332139edf0a65078aa57552"
             }';
 
-    $url = "https://testprepaid.mobilepulsa.net/v1/legacy/index/pulsa/".$operator;
+    $url = "https://testprepaid.mobilepulsa.net/v1/legacy/index/".$type."/".$operator;
 
     $ch  = curl_init();
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));

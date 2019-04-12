@@ -30,7 +30,7 @@
       <a class="nav-link active" href="#pulsa" role="tab" data-toggle="tab">Pulsa</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#listrik" role="tab" data-toggle="tab">Paket Data</a>
+      <a class="nav-link" href="#paket-data" role="tab" data-toggle="tab">Paket Data</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#listrik" role="tab" data-toggle="tab">Listrik PLN</a>
@@ -41,14 +41,83 @@
   </ul><br>
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="pulsa">
+    <!-- <div role="tabpanel" class="tab-pane active" id="pulsa">
       <div class="card">
         <div class="card-header">
           Isi Pulsa Saya
         </div>
         <div class="card-body">
-          <form action="<?=base_url('home/topup_request/')?>" id="isiPulsa" method="post">
+          <form action="<?=base_url('home/topup_request/')?>" id="ppob" method="post">
             <div class="row">
+                <input type="hidden" name="order_type" id="order_type" value="pulsa">
+                <div class="col-md-4">
+                  <div class="form-group">
+                   <input type="text" class="form-control" id="nomor" name="nomor" placeholder="Masukkan nomor HP Anda">
+                   <span id="operator-info"></span>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <select id="nominal" class="form-control" name="nominal">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-primary" value="Beli">
+                  </div>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div> -->
+    <!-- <div role="tabpanel" class="tab-pane" id="paket-data">
+      <div class="card">
+        <div class="card-header">
+          Isi Paket Data Saya
+        </div>
+        <div class="card-body">
+          <form action="<?=base_url('home/topup_request/')?>" id="ppob" method="post">
+            <div class="row">
+                <input type="hidden" name="order_type" id="order_type" value="data">
+                <div class="col-md-4">
+                  <div class="form-group">
+                   <input type="text" class="form-control" id="nomor" name="nomor" placeholder="Masukkan nomor HP Anda">
+                   <span id="operator-info"></span>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <select id="nominal" class="form-control" name="nominal">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-primary" value="Beli">
+                  </div>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div> -->
+    <!-- <div role="tabpanel" class="tab-pane" id="listrik">
+      <div class="card">
+        <div class="card-header">
+          Isi Listrik Saya
+        </div>
+        <div class="card-body">
+          <form action="<?=base_url('home/topup_request/')?>" id="ppob" method="post">
+            <div class="row">
+                <input type="hidden" name="order_type" id="order_type" value="pln">
                 <div class="col-md-4">
                   <div class="form-group">
                    <input type="text" class="form-control" id="nomor" name="nomor" placeholder="Masukkan nomor HP Anda">
@@ -73,11 +142,7 @@
 
         </div>
       </div>
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="listrik">
-      Ini Halaman Profile
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="references">Ini Halaman Setting</div>
+    </div> -->
   </div>
 
 </div>
@@ -108,8 +173,9 @@
     }
 
     function get_nominal(operator){
+      var type = $('#order_type').val();
       $.ajax({
-          url: '<?=base_url('home/get_nominal/')?>' + operator,
+          url: '<?=base_url('home/get_nominal/')?>' + type + "/" + operator,
           type: 'POST',
           dataType: 'JSON',
           success: function(data){
@@ -129,7 +195,7 @@
     }
 
     // this is the id of the form
-    $("#isiPulsa").submit(function(e) {
+    $("#ppob").submit(function(e) {
         e.preventDefault(); // avoid to execute the actual submit of the form.
 
         var form = $(this);
