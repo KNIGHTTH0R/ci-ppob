@@ -47,25 +47,27 @@
           Isi Pulsa Saya
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-               <input type="text" class="form-control" id="nomor" name="nomor" placeholder="Masukkan nomor HP Anda">
-               <span id="operator-info"></span>
-              </div>
+          <form action="<?=base_url('home/topup_request/')?>" id="isiPulsa" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                   <input type="text" class="form-control" id="nomor" name="nomor" placeholder="Masukkan nomor HP Anda">
+                   <span id="operator-info"></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <select id="nominal" class="form-control" name="nominal">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-primary" value="Beli">
+                  </div>
+                </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <select id="nominal" class="form-control" name="nominal">
-                </select>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <input type="submit" name="submit" class="btn btn-primary" value="Beli">
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
         <div class="card-footer">
 
@@ -125,6 +127,26 @@
           }
       });
     }
+
+    // this is the id of the form
+    $("#isiPulsa").submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+               type: "POST",
+               url: url,
+               data: form.serialize(), // serializes the form's elements.
+               dataType: "JSON",
+               success: function(data)
+               {
+                   console.log(data); // show response from the php script.
+               }
+      });
+
+    });
 
     /* Fungsi formatRupiah */
     function formatRupiah(num) {
