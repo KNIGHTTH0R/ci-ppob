@@ -56,8 +56,7 @@
             </div>
             <div class="col-md-3">
               <div class="form-group">
-                <select class="form-control" name="" readonly>
-                    <option value="" selected>Nominal</option>
+                <select id="nominal" class="form-control" name="nominal">
                 </select>
               </div>
             </div>
@@ -110,10 +109,26 @@
       $.ajax({
           url: '<?=base_url('home/get_nominal/')?>' + operator,
           type: 'POST',
+          dataType: 'JSON',
           success: function(data){
-            alert(data);
+            console.log(data);
+            $.each(data, function(key, value) {
+              $.each(value, function(key, value) {
+                var nominal = formatRupiah(value.pulsa_nominal);
+                var price = formatRupiah(value.pulsa_price);
+                $('#nominal')
+                  .append($("<option></option>")
+                             .attr("value",value.pulsa_code)
+                             .html(nominal + " (Rp. " + price + ") "));
+              });
+            });
           }
       });
+    }
+
+    /* Fungsi formatRupiah */
+    function formatRupiah(num) {
+    		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
     }
 
   });
