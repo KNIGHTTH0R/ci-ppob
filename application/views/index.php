@@ -23,7 +23,12 @@
 
 <div class="container">
   <h2>Selamat datang di Deplaza</h2>
-  <p>Anda bisa membeli pulsa, bayar listrik, hingga pesan tiket KAI disini </p><hr>
+  <p>Anda bisa membeli pulsa, bayar listrik, hingga pesan tiket KAI disini </p>
+
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-success" id="check-balance">Cek Saldo</button>
+
+  <hr>
 
   <ul class="nav nav-pills nav-justified" role="tablist">
     <li class="nav-item">
@@ -41,7 +46,7 @@
   </ul><br>
   <!-- Tab panes -->
   <div class="tab-content">
-    <!-- <div role="tabpanel" class="tab-pane active" id="pulsa">
+    <div role="tabpanel" class="tab-pane active" id="pulsa">
       <div class="card">
         <div class="card-header">
           Isi Pulsa Saya
@@ -74,7 +79,7 @@
 
         </div>
       </div>
-    </div> -->
+    </div>
     <!-- <div role="tabpanel" class="tab-pane" id="paket-data">
       <div class="card">
         <div class="card-header">
@@ -218,6 +223,21 @@
     function formatRupiah(num) {
     		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
     }
+
+
+    $('#check-balance').click(function(){
+      $.ajax({
+          url: '<?=base_url('home/check_balance/')?>',
+          type: 'POST',
+          dataType: 'JSON',
+          success: function(data){
+            $.each(data, function(key, value) {
+              console.log(value.balance);
+              alert('Saldo Anda adalah Rp.' + formatRupiah(value.balance));
+            });
+          }
+      });
+    });
 
   });
 </script>
