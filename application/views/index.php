@@ -88,7 +88,7 @@
                 <input type="hidden" name="order_type" id="order_type_data" value="data">
                 <div class="col-md-4">
                   <div class="form-group">
-                   <input type="text" class="form-control" id="nomor-data" name="nomor" placeholder="Masukkan nomor HP Anda">
+                   <input type="text" class="form-control" id="nomor-data" name="nomor" placeholder="Masukkan nomor ID Pelanggan">
                    <span id="operator-info-data"></span>
                   </div>
                 </div>
@@ -156,7 +156,7 @@
     $('#nomor-pulsa').on('input',function(e){
       var nomor = $('#nomor-pulsa').val();
 
-      if(nomor.length >= 4){
+      if(nomor.length == 4){
         var prefix = nomor.substring(0, 4);
         get_operator_pulsa(prefix);
       }
@@ -166,7 +166,7 @@
     $('#nomor-data').on('input',function(e){
       var nomor = $('#nomor-data').val();
 
-      if(nomor.length >= 4){
+      if(nomor.length == 4){
         var prefix = nomor.substring(0, 4);
         get_operator_data(prefix);
       }
@@ -176,7 +176,7 @@
     $('#nomor-listrik').on('input',function(e){
       var nomor = $('#nomor-listrik').val();
 
-      if(nomor.length >= 1){
+      if(nomor.length == 1){
         get_nominal_listrik('pln');
       }
     });
