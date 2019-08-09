@@ -1,2 +1,2 @@
 # ci-ppob
-Documentation Codeigniter PPOB
+Codeigniter PPOB
